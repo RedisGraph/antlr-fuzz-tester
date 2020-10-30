@@ -634,8 +634,7 @@ ADD : ( 'A' | 'a' ) ( 'D' | 'd' ) ( 'D' | 'd' )  ;
 DROP : ( 'D' | 'd' ) ( 'R' | 'r' ) ( 'O' | 'o' ) ( 'P' | 'p' )  ;
 
 oC_SymbolicName
-            :  UnescapedSymbolicName
-                | EscapedSymbolicName
+            :  EscapedSymbolicName
                 | HexLetter
                 | COUNT
                 | FILTER
@@ -648,29 +647,6 @@ oC_SymbolicName
 FILTER : ( 'F' | 'f' ) ( 'I' | 'i' ) ( 'L' | 'l' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'R' | 'r' )  ;
 
 EXTRACT : ( 'E' | 'e' ) ( 'X' | 'x' ) ( 'T' | 't' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'C' | 'c' ) ( 'T' | 't' )  ;
-
-UnescapedSymbolicName
-                     :  IdentifierStart ( IdentifierPart )* ;
-
-/**
- * Based on the unicode identifier and pattern syntax
- *   (http://www.unicode.org/reports/tr31/)
- * And extended with a few characters.
- */
-IdentifierStart
-               :  ID_Start
-                   | Pc
-                   ;
-
-/**
- * Based on the unicode identifier and pattern syntax
- *   (http://www.unicode.org/reports/tr31/)
- * And extended with a few characters.
- */
-IdentifierPart
-              :  ID_Continue
-                  | Sc
-                  ;
 
 /**
  * Any character except "`", enclosed within `backticks`. Backticks are escaped with double backticks.
@@ -756,8 +732,6 @@ fragment EscapedSymbolicName_0 : ~[`] ;
 
 fragment RS : [\u001E] ;
 
-fragment ID_Continue : [\p{ID_Continue}] ;
-
 fragment Comment_1 : ~[*] ;
 
 fragment StringLiteral_1 : ~['\\] ;
@@ -772,11 +746,7 @@ fragment FS : [\u001C] ;
 
 fragment CR : [\r] ;
 
-fragment Sc : [\p{Sc}] ;
-
 fragment SPACE : [ ] ;
-
-fragment Pc : [\p{Pc}] ;
 
 fragment TAB : [\t] ;
 
@@ -787,6 +757,4 @@ fragment LF : [\n] ;
 fragment VT : [\u000B] ;
 
 fragment US : [\u001F] ;
-
-fragment ID_Start : [\p{ID_Start}] ;
 
