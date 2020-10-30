@@ -46,9 +46,9 @@ oC_Union
          | ( UNION SP? oC_SingleQuery )
          ;
 
-UNION : ( 'U' | 'u' ) ( 'N' | 'n' ) ( 'I' | 'i' ) ( 'O' | 'o' ) ( 'N' | 'n' )  ;
+UNION : ('U') ('N') ('I') ('O') ('N')  ;
 
-ALL : ( 'A' | 'a' ) ( 'L' | 'l' ) ( 'L' | 'l' )  ;
+ALL : ('A') ('L') ('L')  ;
 
 oC_SingleQuery
            :  oC_SinglePartQuery
@@ -80,30 +80,30 @@ oC_ReadingClause
 oC_Match
      :  ( OPTIONAL SP )? MATCH SP? oC_Pattern ( SP? oC_Where )? ;
 
-OPTIONAL : ( 'O' | 'o' ) ( 'P' | 'p' ) ( 'T' | 't' ) ( 'I' | 'i' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'A' | 'a' ) ( 'L' | 'l' )  ;
+OPTIONAL : ('O') ('P') ('T') ('I') ('O') ('N') ('A') ('L')  ;
 
-MATCH : ( 'M' | 'm' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'C' | 'c' ) ( 'H' | 'h' )  ;
+MATCH : ('M') ('A') ('T') ('C') ('H')  ;
 
 oC_Unwind
       :  UNWIND SP? oC_Expression SP AS SP oC_Variable ;
 
-UNWIND : ( 'U' | 'u' ) ( 'N' | 'n' ) ( 'W' | 'w' ) ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'D' | 'd' )  ;
+UNWIND : ('U') ('N') ('W') ('I') ('N') ('D')  ;
 
-AS : ( 'A' | 'a' ) ( 'S' | 's' )  ;
+AS : ('A') ('S')  ;
 
 oC_Merge
      :  MERGE SP? oC_PatternPart ( SP oC_MergeAction )* ;
 
-MERGE : ( 'M' | 'm' ) ( 'E' | 'e' ) ( 'R' | 'r' ) ( 'G' | 'g' ) ( 'E' | 'e' )  ;
+MERGE : ('M') ('E') ('R') ('G') ('E')  ;
 
 oC_MergeAction
            :  ( ON SP MATCH SP oC_Set )
                | ( ON SP CREATE SP oC_Set )
                ;
 
-ON : ( 'O' | 'o' ) ( 'N' | 'n' )  ;
+ON : ('O') ('N')  ;
 
-CREATE : ( 'C' | 'c' ) ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'E' | 'e' )  ;
+CREATE : ('C') ('R') ('E') ('A') ('T') ('E')  ;
 
 oC_Create
       :  CREATE SP? oC_Pattern ;
@@ -111,7 +111,7 @@ oC_Create
 oC_Set
    :  SET SP? oC_SetItem ( ',' oC_SetItem )* ;
 
-SET : ( 'S' | 's' ) ( 'E' | 'e' ) ( 'T' | 't' )  ;
+SET : ('S') ('E') ('T')  ;
 
 oC_SetItem
        :  ( oC_PropertyExpression SP? '=' SP? oC_Expression )
@@ -123,14 +123,14 @@ oC_SetItem
 oC_Delete
       :  ( DETACH SP )? DELETE SP? oC_Expression ( SP? ',' SP? oC_Expression )* ;
 
-DETACH : ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'T' | 't' ) ( 'A' | 'a' ) ( 'C' | 'c' ) ( 'H' | 'h' )  ;
+DETACH : ('D') ('E') ('T') ('A') ('C') ('H')  ;
 
-DELETE : ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'L' | 'l' ) ( 'E' | 'e' ) ( 'T' | 't' ) ( 'E' | 'e' )  ;
+DELETE : ('D') ('E') ('L') ('E') ('T') ('E')  ;
 
 oC_Remove
       :  REMOVE SP oC_RemoveItem ( SP? ',' SP? oC_RemoveItem )* ;
 
-REMOVE : ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'M' | 'm' ) ( 'O' | 'o' ) ( 'V' | 'v' ) ( 'E' | 'e' )  ;
+REMOVE : ('R') ('E') ('M') ('O') ('V') ('E')  ;
 
 oC_RemoveItem
           :  ( oC_Variable oC_NodeLabels )
@@ -140,9 +140,9 @@ oC_RemoveItem
 oC_InQueryCall
            :  CALL SP oC_ExplicitProcedureInvocation ( SP? YIELD SP oC_YieldItems )? ;
 
-CALL : ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'L' | 'l' ) ( 'L' | 'l' )  ;
+CALL : ('C') ('A') ('L') ('L')  ;
 
-YIELD : ( 'Y' | 'y' ) ( 'I' | 'i' ) ( 'E' | 'e' ) ( 'L' | 'l' ) ( 'D' | 'd' )  ;
+YIELD : ('Y') ('I') ('E') ('L') ('D')  ;
 
 oC_StandaloneCall
               :  CALL SP ( oC_ExplicitProcedureInvocation | oC_ImplicitProcedureInvocation ) ( SP YIELD SP oC_YieldItems )? ;
@@ -156,17 +156,17 @@ oC_YieldItem
 oC_With
     :  WITH oC_ProjectionBody ( SP? oC_Where )? ;
 
-WITH : ( 'W' | 'w' ) ( 'I' | 'i' ) ( 'T' | 't' ) ( 'H' | 'h' )  ;
+WITH : ('W') ('I') ('T') ('H')  ;
 
 oC_Return
       :  RETURN oC_ProjectionBody ;
 
-RETURN : ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'T' | 't' ) ( 'U' | 'u' ) ( 'R' | 'r' ) ( 'N' | 'n' )  ;
+RETURN : ('R') ('E') ('T') ('U') ('R') ('N')  ;
 
 oC_ProjectionBody
               :  ( SP? DISTINCT )? SP oC_ProjectionItems ( SP oC_Order )? ( SP oC_Skip )? ( SP oC_Limit )? ;
 
-DISTINCT : ( 'D' | 'd' ) ( 'I' | 'i' ) ( 'S' | 's' ) ( 'T' | 't' ) ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'C' | 'c' ) ( 'T' | 't' )  ;
+DISTINCT : ('D') ('I') ('S') ('T') ('I') ('N') ('C') ('T')  ;
 
 oC_ProjectionItems
                :  ( '*' ( SP? ',' SP? oC_ProjectionItem )* )
@@ -181,35 +181,35 @@ oC_ProjectionItem
 oC_Order
      :  ORDER SP BY SP oC_SortItem ( ',' SP? oC_SortItem )* ;
 
-ORDER : ( 'O' | 'o' ) ( 'R' | 'r' ) ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'R' | 'r' )  ;
+ORDER : ('O') ('R') ('D') ('E') ('R')  ;
 
-BY : ( 'B' | 'b' ) ( 'Y' | 'y' )  ;
+BY : ('B') ('Y')  ;
 
 oC_Skip
     :  L_SKIP SP oC_Expression ;
 
-L_SKIP : ( 'S' | 's' ) ( 'K' | 'k' ) ( 'I' | 'i' ) ( 'P' | 'p' )  ;
+L_SKIP : ('S') ('K') ('I') ('P')  ;
 
 oC_Limit
      :  LIMIT SP oC_Expression ;
 
-LIMIT : ( 'L' | 'l' ) ( 'I' | 'i' ) ( 'M' | 'm' ) ( 'I' | 'i' ) ( 'T' | 't' )  ;
+LIMIT : ('L') ('I') ('M') ('I') ('T')  ;
 
 oC_SortItem
         :  oC_Expression ( SP? ( ASCENDING | ASC | DESCENDING | DESC ) )? ;
 
-ASCENDING : ( 'A' | 'a' ) ( 'S' | 's' ) ( 'C' | 'c' ) ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'D' | 'd' ) ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'G' | 'g' )  ;
+ASCENDING : ('A') ('S') ('C') ('E') ('N') ('D') ('I') ('N') ('G')  ;
 
-ASC : ( 'A' | 'a' ) ( 'S' | 's' ) ( 'C' | 'c' )  ;
+ASC : ('A') ('S') ('C')  ;
 
-DESCENDING : ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'S' | 's' ) ( 'C' | 'c' ) ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'D' | 'd' ) ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'G' | 'g' )  ;
+DESCENDING : ('D') ('E') ('S') ('C') ('E') ('N') ('D') ('I') ('N') ('G')  ;
 
-DESC : ( 'D' | 'd' ) ( 'E' | 'e' ) ( 'S' | 's' ) ( 'C' | 'c' )  ;
+DESC : ('D') ('E') ('S') ('C')  ;
 
 oC_Where
      :  WHERE SP oC_Expression ;
 
-WHERE : ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'R' | 'r' ) ( 'E' | 'e' )  ;
+WHERE : ('W') ('H') ('E') ('R') ('E')  ;
 
 oC_Pattern
        :  oC_PatternPart ( SP? ',' SP? oC_PatternPart )* ;
@@ -272,22 +272,22 @@ oC_Expression
 oC_OrExpression
             :  oC_XorExpression ( SP OR SP oC_XorExpression )* ;
 
-OR : ( 'O' | 'o' ) ( 'R' | 'r' )  ;
+OR : ('O') ('R')  ;
 
 oC_XorExpression
              :  oC_AndExpression ( SP XOR SP oC_AndExpression )* ;
 
-XOR : ( 'X' | 'x' ) ( 'O' | 'o' ) ( 'R' | 'r' )  ;
+XOR : ('X') ('O') ('R')  ;
 
 oC_AndExpression
              :  oC_NotExpression ( SP AND SP oC_NotExpression )* ;
 
-AND : ( 'A' | 'a' ) ( 'N' | 'n' ) ( 'D' | 'd' )  ;
+AND : ('A') ('N') ('D')  ;
 
 oC_NotExpression
              :  ( NOT SP? )* oC_ComparisonExpression ;
 
-NOT : ( 'N' | 'n' ) ( 'O' | 'o' ) ( 'T' | 't' )  ;
+NOT : ('N') ('O') ('T')  ;
 
 oC_ComparisonExpression
                     :  oC_AddOrSubtractExpression ( SP? oC_PartialComparisonExpression )* ;
@@ -313,25 +313,25 @@ oC_ListOperatorExpression
                           | ( SP? '[' oC_Expression? '..' oC_Expression? ']' )
                           ;
 
-IN : ( 'I' | 'i' ) ( 'N' | 'n' )  ;
+IN : ('I') ('N')  ;
 
 oC_StringOperatorExpression
                         :  ( ( SP STARTS SP WITH ) | ( SP ENDS SP WITH ) | ( SP CONTAINS ) ) SP? oC_PropertyOrLabelsExpression ;
 
-STARTS : ( 'S' | 's' ) ( 'T' | 't' ) ( 'A' | 'a' ) ( 'R' | 'r' ) ( 'T' | 't' ) ( 'S' | 's' )  ;
+STARTS : ('S') ('T') ('A') ('R') ('T') ('S')  ;
 
-ENDS : ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'D' | 'd' ) ( 'S' | 's' )  ;
+ENDS : ('E') ('N') ('D') ('S')  ;
 
-CONTAINS : ( 'C' | 'c' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'T' | 't' ) ( 'A' | 'a' ) ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'S' | 's' )  ;
+CONTAINS : ('C') ('O') ('N') ('T') ('A') ('I') ('N') ('S')  ;
 
 oC_NullOperatorExpression
                       :  ( SP IS SP NULL )
                           | ( SP IS SP NOT SP NULL )
                           ;
 
-IS : ( 'I' | 'i' ) ( 'S' | 's' )  ;
+IS : ('I') ('S')  ;
 
-NULL : ( 'N' | 'n' ) ( 'U' | 'u' ) ( 'L' | 'l' ) ( 'L' | 'l' )  ;
+NULL : ('N') ('U') ('L') ('L')  ;
 
 oC_PropertyOrLabelsExpression
                           :  oC_Atom ( SP? oC_PropertyLookup )* ( SP? oC_NodeLabels )? ;
@@ -353,13 +353,13 @@ oC_Atom
         | oC_Variable
         ;
 
-COUNT : ( 'C' | 'c' ) ( 'O' | 'o' ) ( 'U' | 'u' ) ( 'N' | 'n' ) ( 'T' | 't' )  ;
+COUNT : ('C') ('O') ('U') ('N') ('T')  ;
 
-ANY : ( 'A' | 'a' ) ( 'N' | 'n' ) ( 'Y' | 'y' )  ;
+ANY : ('A') ('N') ('Y')  ;
 
-NONE : ( 'N' | 'n' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'E' | 'e' )  ;
+NONE : ('N') ('O') ('N') ('E')  ;
 
-SINGLE : ( 'S' | 's' ) ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'G' | 'g' ) ( 'L' | 'l' ) ( 'E' | 'e' )  ;
+SINGLE : ('S') ('I') ('N') ('G') ('L') ('E')  ;
 
 oC_Literal
        :  oC_NumberLiteral
@@ -375,9 +375,9 @@ oC_BooleanLiteral
                   | FALSE
                   ;
 
-TRUE : ( 'T' | 't' ) ( 'R' | 'r' ) ( 'U' | 'u' ) ( 'E' | 'e' )  ;
+TRUE : ('T') ('R') ('U') ('E')  ;
 
-FALSE : ( 'F' | 'f' ) ( 'A' | 'a' ) ( 'L' | 'l' ) ( 'S' | 's' ) ( 'E' | 'e' )  ;
+FALSE : ('F') ('A') ('L') ('S') ('E')  ;
 
 oC_ListLiteral
            :  '[' SP? ( oC_Expression SP? ( ',' SP? oC_Expression SP? )* )? ']' ;
@@ -411,7 +411,7 @@ oC_FunctionName
                 | EXISTS
                 ;
 
-EXISTS : ( 'E' | 'e' ) ( 'X' | 'x' ) ( 'I' | 'i' ) ( 'S' | 's' ) ( 'T' | 't' ) ( 'S' | 's' )  ;
+EXISTS : ('E') ('X') ('I') ('S') ('T') ('S')  ;
 
 oC_ExplicitProcedureInvocation
                            :  oC_ProcedureName SP? '(' SP? ( oC_Expression SP? ( ',' SP? oC_Expression SP? )* )? ')' ;
@@ -440,18 +440,18 @@ oC_PropertyLookup
 oC_CaseExpression
               :  ( ( CASE ( SP? oC_CaseAlternatives )+ ) | ( CASE SP? oC_Expression ( SP? oC_CaseAlternatives )+ ) ) ( SP? ELSE SP? oC_Expression )? SP? END ;
 
-CASE : ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' )  ;
+CASE : ('C') ('A') ('S') ('E')  ;
 
-ELSE : ( 'E' | 'e' ) ( 'L' | 'l' ) ( 'S' | 's' ) ( 'E' | 'e' )  ;
+ELSE : ('E') ('L') ('S') ('E')  ;
 
-END : ( 'E' | 'e' ) ( 'N' | 'n' ) ( 'D' | 'd' )  ;
+END : ('E') ('N') ('D')  ;
 
 oC_CaseAlternatives
                 :  WHEN SP? oC_Expression SP? THEN SP? oC_Expression ;
 
-WHEN : ( 'W' | 'w' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'N' | 'n' )  ;
+WHEN : ('W') ('H') ('E') ('N')  ;
 
-THEN : ( 'T' | 't' ) ( 'H' | 'h' ) ( 'E' | 'e' ) ( 'N' | 'n' )  ;
+THEN : ('T') ('H') ('E') ('N')  ;
 
 oC_Variable
         :  oC_SymbolicName ;
@@ -462,7 +462,7 @@ StringLiteral
                  ;
 
 EscapedChar
-           :  '\\' ( '\\' | '\'' | '"' | ( 'B' | 'b' ) | ( 'F' | 'f' ) | ( 'N' | 'n' ) | ( 'R' | 'r' ) | ( 'T' | 't' ) | ( ( 'U' | 'u' ) ( HexDigit HexDigit HexDigit HexDigit ) ) | ( ( 'U' | 'u' ) ( HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit ) ) ) ;
+           :  '\\' ('\\' | '\'' | '"' | ('B') | ('F') | ('N') | ('R') | ('T') | (('U') ( HexDigit HexDigit HexDigit HexDigit ) ) | (('U') (HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit HexDigit ) ) ) ;
 
 oC_NumberLiteral
              :  oC_DoubleLiteral
@@ -499,12 +499,12 @@ OctalInteger
             :  ZeroDigit ( OctDigit )+ ;
 
 HexLetter
-         :  ( 'A' | 'a' )
-             | ( 'B' | 'b' )
-             | ( 'C' | 'c' )
-             | ( 'D' | 'd' )
-             | ( 'E' | 'e' )
-             | ( 'F' | 'f' )
+         :  ('A')
+             | ('B')
+             | ('C')
+             | ('D')
+             | ('E')
+             | ('F')
              ;
 
 HexDigit
@@ -547,7 +547,7 @@ oC_DoubleLiteral
                  ;
 
 ExponentDecimalReal
-                   :  ( ( Digit )+ | ( ( Digit )+ '.' ( Digit )+ ) | ( '.' ( Digit )+ ) ) ( 'E' | 'e' ) '-'? ( Digit )+ ;
+                   :  ( ( Digit )+ | ( ( Digit )+ '.' ( Digit )+ ) | ( '.' ( Digit )+ ) ) ('E') '-'? ( Digit )+ ;
 
 RegularDecimalReal
                   :  ( Digit )* '.' ( Digit )+ ;
@@ -613,25 +613,25 @@ oC_ReservedWord
                 | DROP
                 ;
 
-CONSTRAINT : ( 'C' | 'c' ) ( 'O' | 'o' ) ( 'N' | 'n' ) ( 'S' | 's' ) ( 'T' | 't' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'I' | 'i' ) ( 'N' | 'n' ) ( 'T' | 't' )  ;
+CONSTRAINT : ('C') ('O') ('N') ('S') ('T') ('R') ('A') ('I') ('N') ('T')  ;
 
-DO : ( 'D' | 'd' ) ( 'O' | 'o' )  ;
+DO : ('D') ('O')  ;
 
-FOR : ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'R' | 'r' )  ;
+FOR : ('F') ('O') ('R')  ;
 
-REQUIRE : ( 'R' | 'r' ) ( 'E' | 'e' ) ( 'Q' | 'q' ) ( 'U' | 'u' ) ( 'I' | 'i' ) ( 'R' | 'r' ) ( 'E' | 'e' )  ;
+REQUIRE : ('R') ('E') ('Q') ('U') ('I') ('R') ('E')  ;
 
-UNIQUE : ( 'U' | 'u' ) ( 'N' | 'n' ) ( 'I' | 'i' ) ( 'Q' | 'q' ) ( 'U' | 'u' ) ( 'E' | 'e' )  ;
+UNIQUE : ('U') ('N') ('I') ('Q') ('U') ('E')  ;
 
-MANDATORY : ( 'M' | 'm' ) ( 'A' | 'a' ) ( 'N' | 'n' ) ( 'D' | 'd' ) ( 'A' | 'a' ) ( 'T' | 't' ) ( 'O' | 'o' ) ( 'R' | 'r' ) ( 'Y' | 'y' )  ;
+MANDATORY : ('M') ('A') ('N') ('D') ('A') ('T') ('O') ('R') ('Y')  ;
 
-SCALAR : ( 'S' | 's' ) ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'L' | 'l' ) ( 'A' | 'a' ) ( 'R' | 'r' )  ;
+SCALAR : ('S') ('C') ('A') ('L') ('A') ('R')  ;
 
-OF : ( 'O' | 'o' ) ( 'F' | 'f' )  ;
+OF : ('O') ('F')  ;
 
-ADD : ( 'A' | 'a' ) ( 'D' | 'd' ) ( 'D' | 'd' )  ;
+ADD : ('A') ('D') ('D')  ;
 
-DROP : ( 'D' | 'd' ) ( 'R' | 'r' ) ( 'O' | 'o' ) ( 'P' | 'p' )  ;
+DROP : ('D') ('R') ('O') ('P')  ;
 
 oC_SymbolicName
             :  EscapedSymbolicName
@@ -644,9 +644,9 @@ oC_SymbolicName
                 | SINGLE
                 ;
 
-FILTER : ( 'F' | 'f' ) ( 'I' | 'i' ) ( 'L' | 'l' ) ( 'T' | 't' ) ( 'E' | 'e' ) ( 'R' | 'r' )  ;
+FILTER : ('F') ('I') ('L') ('T') ('E') ('R')  ;
 
-EXTRACT : ( 'E' | 'e' ) ( 'X' | 'x' ) ( 'T' | 't' ) ( 'R' | 'r' ) ( 'A' | 'a' ) ( 'C' | 'c' ) ( 'T' | 't' )  ;
+EXTRACT : ('E') ('X') ('T') ('R') ('A') ('C') ('T')  ;
 
 /**
  * Any character except "`", enclosed within `backticks`. Backticks are escaped with double backticks.
@@ -659,34 +659,6 @@ SP
 
 WHITESPACE
           :  SPACE
-              | TAB
-              | LF
-              | VT
-              | FF
-              | CR
-              | FS
-              | GS
-              | RS
-              | US
-              | '\u1680'
-              | '\u180e'
-              | '\u2000'
-              | '\u2001'
-              | '\u2002'
-              | '\u2003'
-              | '\u2004'
-              | '\u2005'
-              | '\u2006'
-              | '\u2008'
-              | '\u2009'
-              | '\u200a'
-              | '\u2028'
-              | '\u2029'
-              | '\u205f'
-              | '\u3000'
-              | '\u00a0'
-              | '\u2007'
-              | '\u202f'
               | Comment
               ;
 
