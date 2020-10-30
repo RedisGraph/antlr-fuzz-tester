@@ -634,18 +634,7 @@ DROP : ('D') ('R') ('O') ('P')  ;
 
 oC_SymbolicName
             :  EscapedSymbolicName
-                | HexLetter
-                | COUNT
-                | FILTER
-                | EXTRACT
-                | ANY
-                | NONE
-                | SINGLE
                 ;
-
-FILTER : ('F') ('I') ('L') ('T') ('E') ('R')  ;
-
-EXTRACT : ('E') ('X') ('T') ('R') ('A') ('C') ('T')  ;
 
 /**
  * Any character except "`", enclosed within `backticks`. Backticks are escaped with double backticks.
@@ -675,13 +664,7 @@ oC_Dash
 
 fragment EscapedSymbolicName_0 : ~[`] ;
 
-fragment Comment_1 : ~[*] ;
-
 fragment StringLiteral_1 : ~['\\] ;
-
-fragment Comment_3 : ~[\n\r] ;
-
-fragment Comment_2 : ~[/] ;
 
 fragment SPACE : [ ] ;
 
