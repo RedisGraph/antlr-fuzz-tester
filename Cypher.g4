@@ -35,7 +35,6 @@ oC_Statement
 
 oC_Query
      :  oC_RegularQuery
-         | oC_StandaloneCall
          ;
 
 oC_RegularQuery
@@ -223,25 +222,25 @@ oC_AnonymousPatternPart
                     :  oC_PatternElement ;
 
 oC_PatternElement
-              :  ( oC_NodePattern ( SP? oC_PatternElementChain )* )
+              :  ( oC_NodePattern ( oC_PatternElementChain )* )
                   | ( '(' oC_PatternElement ')' )
                   ;
 
 oC_NodePattern
-           :  '(' SP? ( oC_Variable SP? )? ( oC_NodeLabels SP? )? ( oC_Properties SP? )? ')' ;
+           :  '(' ( oC_Variable )? ( oC_NodeLabels )? ( oC_Properties )? ')' ;
 
 oC_PatternElementChain
-                   :  oC_RelationshipPattern SP? oC_NodePattern ;
+                   :  oC_RelationshipPattern oC_NodePattern ;
 
 oC_RelationshipPattern
-                   :  ( oC_LeftArrowHead SP? oC_Dash SP? oC_RelationshipDetail? SP? oC_Dash SP? oC_RightArrowHead )
-                       | ( oC_LeftArrowHead SP? oC_Dash SP? oC_RelationshipDetail? SP? oC_Dash )
-                       | ( oC_Dash SP? oC_RelationshipDetail? SP? oC_Dash SP? oC_RightArrowHead )
-                       | ( oC_Dash SP? oC_RelationshipDetail? SP? oC_Dash )
+                   :  ( oC_LeftArrowHead oC_Dash oC_RelationshipDetail? oC_Dash oC_RightArrowHead )
+                       | ( oC_LeftArrowHead oC_Dash oC_RelationshipDetail? oC_Dash )
+                       | ( oC_Dash oC_RelationshipDetail? oC_Dash oC_RightArrowHead )
+                       | ( oC_Dash oC_RelationshipDetail? oC_Dash )
                        ;
 
 oC_RelationshipDetail
-                  :  '[' SP? ( oC_Variable SP? )? ( oC_RelationshipTypes SP? )? oC_RangeLiteral? ( oC_Properties SP? )? ']' ;
+                  :  '[' ( oC_Variable )? ( oC_RelationshipTypes )? oC_RangeLiteral? ( oC_Properties )? ']' ;
 
 oC_Properties
           :  oC_MapLiteral
@@ -249,16 +248,16 @@ oC_Properties
               ;
 
 oC_RelationshipTypes
-                 :  ':' SP? oC_RelTypeName ( SP? '|' ':'? SP? oC_RelTypeName )* ;
+                 :  ':' oC_RelTypeName ( '|' ':'? oC_RelTypeName )* ;
 
 oC_NodeLabels
-          :  oC_NodeLabel ( SP? oC_NodeLabel )* ;
+          :  oC_NodeLabel ( oC_NodeLabel )* ;
 
 oC_NodeLabel
-         :  ':' SP? oC_LabelName ;
+         :  ':' oC_LabelName ;
 
 oC_RangeLiteral
-            :  '*' SP? ( oC_IntegerLiteral SP? )? ( '..' SP? ( oC_IntegerLiteral SP? )? )? ;
+            :  '*' ( oC_IntegerLiteral )? ( '..' ( oC_IntegerLiteral )? )? ;
 
 oC_LabelName
          :  oC_SchemaName ;
@@ -340,7 +339,7 @@ oC_Atom
     :  oC_Literal
         | oC_Parameter
         | oC_CaseExpression
-        | ( COUNT SP? '(' SP? '*' SP? ')' )
+        | ( COUNT '(' SP? '*' SP? ')' )
         | oC_ListComprehension
         | oC_PatternComprehension
         | ( ALL SP? '(' SP? oC_FilterExpression SP? ')' )
@@ -470,13 +469,13 @@ oC_NumberLiteral
                  ;
 
 oC_MapLiteral
-          :  '{' SP? ( oC_PropertyKeyName SP? ':' SP? oC_Expression SP? ( ',' SP? oC_PropertyKeyName SP? ':' SP? oC_Expression SP? )* )? '}' ;
+          :  '{' ( oC_PropertyKeyName ':' oC_Expression ( ',' oC_PropertyKeyName ':' oC_Expression )* )? '}' ;
 
 oC_Parameter
          :  '$' ( oC_SymbolicName | DecimalInteger ) ;
 
 oC_PropertyExpression
-                  :  oC_Atom ( SP? oC_PropertyLookup )+ ;
+                  :  oC_Atom ( oC_PropertyLookup )+ ;
 
 oC_PropertyKeyName
                :  oC_SchemaName ;
@@ -652,50 +651,25 @@ EXTRACT : ('E') ('X') ('T') ('R') ('A') ('C') ('T')  ;
  * Any character except "`", enclosed within `backticks`. Backticks are escaped with double backticks.
  */
 EscapedSymbolicName
-                   :  ( '`' ( EscapedSymbolicName_0 )* '`' )+ ;
+                   :  ( ( EscapedSymbolicName_0 )* )+ ;
 
 SP
-  :  ( WHITESPACE )+ ;
+  :  ( WHITESPACE ) ;
 
 WHITESPACE
           :  SPACE
-              | Comment
               ;
-
-Comment
-       :  ( '/*' ( Comment_1 | ( '*' Comment_2 ) )* '*/' )
-           | ( '//' ( Comment_3 )* ( EOF ) )
-           ;
 
 oC_LeftArrowHead
              :  '<'
-                 | '\u27e8'
-                 | '\u3008'
-                 | '\ufe64'
-                 | '\uff1c'
                  ;
 
 oC_RightArrowHead
               :  '>'
-                  | '\u27e9'
-                  | '\u3009'
-                  | '\ufe65'
-                  | '\uff1e'
                   ;
 
 oC_Dash
     :  '-'
-        | '\u00ad'
-        | '\u2010'
-        | '\u2011'
-        | '\u2012'
-        | '\u2013'
-        | '\u2014'
-        | '\u2015'
-        | '\u2212'
-        | '\ufe58'
-        | '\ufe63'
-        | '\uff0d'
         ;
 
 
