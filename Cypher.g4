@@ -664,7 +664,7 @@ WHITESPACE
 
 Comment
        :  ( '/*' ( Comment_1 | ( '*' Comment_2 ) )* '*/' )
-           | ( '//' ( Comment_3 )* CR? ( LF | EOF ) )
+           | ( '//' ( Comment_3 )* ( EOF ) )
            ;
 
 oC_LeftArrowHead
@@ -698,11 +698,8 @@ oC_Dash
         | '\uff0d'
         ;
 
-fragment FF : [\f] ;
 
 fragment EscapedSymbolicName_0 : ~[`] ;
-
-fragment RS : [\u001E] ;
 
 fragment Comment_1 : ~[*] ;
 
@@ -712,21 +709,7 @@ fragment Comment_3 : ~[\n\r] ;
 
 fragment Comment_2 : ~[/] ;
 
-fragment GS : [\u001D] ;
-
-fragment FS : [\u001C] ;
-
-fragment CR : [\r] ;
-
 fragment SPACE : [ ] ;
 
-fragment TAB : [\t] ;
-
 fragment StringLiteral_0 : ~["\\] ;
-
-fragment LF : [\n] ;
-
-fragment VT : [\u000B] ;
-
-fragment US : [\u001F] ;
 
