@@ -248,10 +248,10 @@ oC_RangeLiteral
             :  '*' ( oC_IntegerLiteral )? ( '..' ( oC_IntegerLiteral )? )? ;
 
 oC_LabelName
-         :  oC_SchemaName ;
+         :  ( 'label' NonZeroDigit );
 
 oC_RelTypeName
-           :  oC_SchemaName ;
+         :  ( 'reltype' NonZeroDigit );
 
 oC_Expression
           :  oC_OrExpression ;
@@ -475,8 +475,6 @@ oC_ProcedureName
                | 'db.relationshiptypes'
                | 'dbms.procedures' ) ;
 
-oC_Namespace
-         :  ( oC_SymbolicName '.' )* ;
 
 oC_ListComprehension
                  :  '[' SP oC_FilterExpression ( SP '|' SP oC_Expression )? SP ']' ;
@@ -524,8 +522,7 @@ oC_Parameter
 oC_PropertyExpression
                   :  oC_Atom ( oC_PropertyLookup )+ ;
 
-oC_PropertyKeyName
-               :  oC_SchemaName ;
+fragment oC_PropertyKeyName : ( 'prop' NonZeroDigit );
 
 oC_IntegerLiteral
               :  HexInteger
@@ -597,10 +594,6 @@ ExponentDecimalReal
 
 RegularDecimalReal
                   :  ( Digit )* '.' ( Digit )+ ;
-
-oC_SchemaName
-          :  oC_SymbolicName
-              ;
 
 oC_ReservedWord
             :  ALL
