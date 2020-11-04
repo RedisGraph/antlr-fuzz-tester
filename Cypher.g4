@@ -390,11 +390,70 @@ oC_FunctionInvocation
                   :  oC_FunctionName '(' ( DISTINCT SP )? ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
 
 oC_FunctionName
-            :  ( oC_Namespace oC_SymbolicName )
-                | EXISTS
-                ;
-
-EXISTS : ('E') ('X') ('I') ('S') ('T') ('S')  ;
+            : ( 'ABS'
+              | 'ADD'
+              | 'ALL'
+              | 'AND'
+              | 'ANY'
+              | 'CASE'
+              | 'CEIL'
+              | 'COALESCE'
+              | 'CONTAINS'
+              | 'DIV'
+              | 'ENDS WITH'
+              | 'EQ'
+              | 'EXISTS'
+              | 'FLOOR'
+              | 'GE'
+              | 'GT'
+              | 'HEAD'
+              | 'ID'
+              | 'IN'
+              | 'INDEGREE'
+              | 'IS NOT NULL'
+              | 'IS NULL'
+              | 'LABELS'
+              | 'LE'
+              | 'LEFT'
+              | 'LENGTH'
+              | 'LIST_COMPREHENSION'
+              | 'LT'
+              | 'LTRIM'
+              | 'MOD'
+              | 'MUL'
+              | 'NEQ'
+              | 'NODES'
+              | 'NOT'
+              | 'OR'
+              | 'OUTDEGREE'
+              | 'PATH_FILTER'
+              | 'PROPERTY'
+              | 'RAND'
+              | 'RANDOMUUID'
+              | 'RANGE'
+              | 'RELATIONSHIPS'
+              | 'REVERSE'
+              | 'RIGHT'
+              | 'ROUND'
+              | 'RTRIM'
+              | 'SIGN'
+              | 'SIZE'
+              | 'SLICE'
+              | 'STARTS WITH'
+              | 'SUB'
+              | 'SUBSCRIPT'
+              | 'SUBSTRING'
+              | 'TAIL'
+              | 'TIMESTAMP'
+              | 'TOINTEGER'
+              | 'TOLIST'
+              | 'TOLOWER'
+              | 'TOPATH'
+              | 'TOSTRING'
+              | 'TOUPPER'
+              | 'TRIM'
+              | 'TYPE'
+              | 'XOR' ) ;
 
 oC_ExplicitProcedureInvocation
                            :  oC_ProcedureName SP '(' SP ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
@@ -406,7 +465,15 @@ oC_ProcedureResultField
                     :  oC_SymbolicName ;
 
 oC_ProcedureName
-             :  oC_Namespace oC_SymbolicName ;
+             : ( 'algo.bfs'
+               | 'algo.pagerank'
+               | 'db.idx.fulltext.createnodeindex'
+               | 'db.idx.fulltext.drop'
+               | 'db.idx.fulltext.querynodes'
+               | 'db.labels'
+               | 'db.propertykeys'
+               | 'db.relationshiptypes'
+               | 'dbms.procedures' ) ;
 
 oC_Namespace
          :  ( oC_SymbolicName '.' )* ;
@@ -545,7 +612,6 @@ oC_ReservedWord
                 | DESC
                 | DESCENDING
                 | DETACH
-                | EXISTS
                 | LIMIT
                 | MATCH
                 | MERGE
