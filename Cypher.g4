@@ -289,7 +289,7 @@ oC_PowerOfExpression
                  :  oC_UnaryAddOrSubtractExpression ( SP '^' SP oC_UnaryAddOrSubtractExpression )* ;
 
 oC_UnaryAddOrSubtractExpression
-                            :  ( ( '+' | '-' ) SP )* oC_StringListNullOperatorExpression ;
+                            :  oC_StringListNullOperatorExpression ;
 
 oC_StringListNullOperatorExpression
                                 :  oC_PropertyOrLabelsExpression ( oC_StringOperatorExpression | oC_ListOperatorExpression | oC_NullOperatorExpression )* ;
