@@ -67,7 +67,6 @@ oC_UpdatingClause
                   | oC_Merge
                   | oC_Delete
                   | oC_Set
-                  | oC_Remove
                   ;
 
 oC_ReadingClause
@@ -124,15 +123,6 @@ oC_Delete
 DETACH : ('D') ('E') ('T') ('A') ('C') ('H')  ;
 
 DELETE : ('D') ('E') ('L') ('E') ('T') ('E')  ;
-
-oC_Remove
-      :  REMOVE SP oC_RemoveItem ( SP ',' SP oC_RemoveItem )* ;
-
-REMOVE : ('R') ('E') ('M') ('O') ('V') ('E')  ;
-
-oC_RemoveItem
-              | oC_PropertyExpression
-              ;
 
 oC_InQueryCall
            :  CALL SP oC_ExplicitProcedureInvocation ( SP YIELD SP oC_YieldItems )? ;
@@ -562,7 +552,6 @@ oC_ReservedWord
                 | ON
                 | OPTIONAL
                 | ORDER
-                | REMOVE
                 | RETURN
                 | SET
                 | L_SKIP
