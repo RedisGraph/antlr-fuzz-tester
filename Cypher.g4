@@ -321,7 +321,7 @@ IS : ('I') ('S')  ;
 NULL : ('N') ('U') ('L') ('L')  ;
 
 oC_PropertyOrLabelsExpression
-                          :  oC_Atom ( SP oC_PropertyLookup )* ( SP oC_NodeLabels )? ;
+                          :  oC_Atom ( oC_PropertyLookup )* ( SP oC_NodeLabels )? ;
 
 oC_Atom
     :  oC_Literal
@@ -387,7 +387,7 @@ oC_IdInColl
         :  oC_Variable SP IN SP oC_Expression ;
 
 oC_FunctionInvocation
-                  :  oC_FunctionName SP '(' SP ( DISTINCT SP )? ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
+                  :  oC_FunctionName '(' ( DISTINCT SP )? ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
 
 oC_FunctionName
             :  ( oC_Namespace oC_SymbolicName )
@@ -418,7 +418,7 @@ oC_PatternComprehension
                     :  '[' SP ( oC_Variable SP '=' SP )? oC_RelationshipsPattern SP ( WHERE SP oC_Expression SP )? '|' SP oC_Expression SP ']' ;
 
 oC_PropertyLookup
-              :  '.' SP ( oC_PropertyKeyName ) ;
+              :  '.' ( oC_PropertyKeyName ) ;
 
 oC_CaseExpression
               :  ( ( CASE ( SP oC_CaseAlternatives )+ ) | ( CASE SP oC_Expression ( SP oC_CaseAlternatives )+ ) ) ( SP ELSE SP oC_Expression )? SP END ;
