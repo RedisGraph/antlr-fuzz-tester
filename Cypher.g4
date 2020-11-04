@@ -239,7 +239,7 @@ oC_RelationshipTypes
                  :  ':' oC_RelTypeName ( '|' ':'? oC_RelTypeName )* ;
 
 oC_NodeLabels
-          :  oC_NodeLabel ( oC_NodeLabel )* ;
+          :  oC_NodeLabel ;
 
 oC_NodeLabel
          :  ':' oC_LabelName ;
