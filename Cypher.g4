@@ -210,8 +210,8 @@ oC_AnonymousPatternPart
                     :  oC_PatternElement ;
 
 oC_PatternElement
-              :  ( SP oC_NodePattern ( oC_PatternElementChain )* SP )
-                  | ( oC_PatternElement )
+              :  ( oC_NodePattern ( SP? oC_PatternElementChain )* )
+                  | ( '(' oC_PatternElement ')' )
                   ;
 
 oC_NodePattern
@@ -522,7 +522,7 @@ oC_Parameter
 oC_PropertyExpression
                   :  oC_Atom ( oC_PropertyLookup )+ ;
 
-fragment oC_PropertyKeyName : ( 'prop' NonZeroDigit );
+oC_PropertyKeyName : ( 'prop' NonZeroDigit );
 
 oC_IntegerLiteral
               :  HexInteger
