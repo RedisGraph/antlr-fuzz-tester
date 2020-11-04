@@ -116,7 +116,6 @@ oC_SetItem
        :  ( oC_PropertyExpression SP '=' SP oC_Expression )
            | ( oC_Variable SP '=' SP oC_Expression )
            | ( oC_Variable SP '+=' SP oC_Expression )
-           | ( oC_Variable SP oC_NodeLabels )
            ;
 
 oC_Delete
@@ -132,7 +131,6 @@ oC_Remove
 REMOVE : ('R') ('E') ('M') ('O') ('V') ('E')  ;
 
 oC_RemoveItem
-          :  ( oC_Variable oC_NodeLabels )
               | oC_PropertyExpression
               ;
 
@@ -223,7 +221,7 @@ oC_AnonymousPatternPart
 
 oC_PatternElement
               :  ( SP oC_NodePattern ( oC_PatternElementChain )* SP )
-                  | ( SP '(' oC_PatternElement ')' SP )
+                  | ( oC_PatternElement )
                   ;
 
 oC_NodePattern
@@ -453,7 +451,6 @@ oC_Variable
 
 StringLiteral
              :  ( '"' ( StringLiteral_0 )* '"' )
-                 | ( '\'' ( StringLiteral_1 )* '\'' )
                  ;
 
 oC_NumberLiteral
@@ -546,7 +543,6 @@ RegularDecimalReal
 
 oC_SchemaName
           :  oC_SymbolicName
-              | oC_ReservedWord
               ;
 
 oC_ReservedWord
@@ -633,7 +629,7 @@ oC_SymbolicName
  * Any character except "`", enclosed within `backticks`. Backticks are escaped with double backticks.
  */
 EscapedSymbolicName
-                   :  ( ( EscapedSymbolicName_0 )* )+ ;
+                   :  ( ( EscapedSymbolicName_0 ) ) ;
 
 SP
   :  ( WHITESPACE ) ;
@@ -655,11 +651,9 @@ oC_Dash
         ;
 
 
-fragment EscapedSymbolicName_0 : ~[`] ;
-
-fragment StringLiteral_1 : ~['\\] ;
+fragment EscapedSymbolicName_0 : ( 'var'[1-9] ) ;
 
 fragment SPACE : [ ] ;
 
-fragment StringLiteral_0 : ~["\\] ;
+fragment StringLiteral_0 : ('L') ('I') ('T');
 
