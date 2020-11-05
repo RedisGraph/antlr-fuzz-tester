@@ -231,9 +231,7 @@ oC_RelationshipDetail
                   :  '[' ( oC_Variable )? ( oC_RelationshipTypes )? oC_RangeLiteral? ( oC_Properties )? ']' ;
 
 oC_Properties
-          :  oC_MapLiteral
-              | oC_Parameter
-              ;
+          :  oC_MapLiteral ;
 
 oC_RelationshipTypes
                  :  ':' oC_RelTypeName ( '|' ':'? oC_RelTypeName )* ;
