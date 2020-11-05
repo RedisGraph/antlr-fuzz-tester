@@ -83,7 +83,7 @@ OPTIONAL : ('O') ('P') ('T') ('I') ('O') ('N') ('A') ('L')  ;
 MATCH : ('M') ('A') ('T') ('C') ('H')  ;
 
 oC_Unwind
-      :  UNWIND SP oC_Expression SP AS SP oC_Variable ;
+      :  UNWIND SP rG_Expression SP AS SP oC_Variable ;
 
 UNWIND : ('U') ('N') ('W') ('I') ('N') ('D')  ;
 
@@ -112,13 +112,13 @@ oC_Set
 SET : ('S') ('E') ('T')  ;
 
 oC_SetItem
-       :  ( oC_PropertyExpression SP '=' SP oC_Expression )
-           | ( oC_Variable SP '=' SP oC_Expression )
-           | ( oC_Variable SP '+=' SP oC_Expression )
+       :  ( oC_PropertyExpression SP '=' SP rG_Expression )
+           | ( oC_Variable SP '=' SP rG_Expression )
+           | ( oC_Variable SP '+=' SP rG_Expression )
            ;
 
 oC_Delete
-      :  ( DETACH SP )? DELETE SP oC_Expression ( SP ',' SP oC_Expression )* ;
+      :  ( DETACH SP )? DELETE SP oC_Variable ( SP ',' SP oC_Variable )* ;
 
 DETACH : ('D') ('E') ('T') ('A') ('C') ('H')  ;
 
@@ -161,8 +161,8 @@ oC_ProjectionItems
                    ;
 
 oC_ProjectionItem
-              :  ( oC_Expression SP AS SP oC_Variable )
-                  | oC_Expression
+              :  ( rG_Expression SP AS SP oC_Variable )
+                  | rG_Expression
                   ;
 
 oC_Order
@@ -173,17 +173,17 @@ ORDER : ('O') ('R') ('D') ('E') ('R')  ;
 BY : ('B') ('Y')  ;
 
 oC_Skip
-    :  L_SKIP SP oC_Expression ;
+    :  L_SKIP SP DecimalInteger;
 
 L_SKIP : ('S') ('K') ('I') ('P')  ;
 
 oC_Limit
-     :  LIMIT SP oC_Expression ;
+     :  LIMIT SP DecimalInteger ;
 
 LIMIT : ('L') ('I') ('M') ('I') ('T')  ;
 
 oC_SortItem
-        :  oC_Expression ( SP ( ASCENDING | ASC | DESCENDING | DESC ) )? ;
+        :  rG_Expression ( SP ( ASCENDING | ASC | DESCENDING | DESC ) )? ;
 
 ASCENDING : ('A') ('S') ('C') ('E') ('N') ('D') ('I') ('N') ('G')  ;
 
@@ -251,6 +251,10 @@ oC_LabelName
 oC_RelTypeName
          :  ( 'reltype' NonZeroDigit );
 
+rG_Expression
+          :  (oC_Atom | oC_PropertyExpression) ;
+
+/* TODO kill */
 oC_Expression
           :  oC_OrExpression ;
 
@@ -294,7 +298,7 @@ oC_StringListNullOperatorExpression
 
 oC_ListOperatorExpression
                       :  ( SP IN SP oC_PropertyOrLabelsExpression )
-                          | ( SP '[' oC_Expression ']' )
+                          | ( SP '[' rG_Expression ']' )
                           ;
 
 IN : ('I') ('N')  ;
@@ -328,7 +332,6 @@ oC_Atom
         | oC_ListComprehension
         | oC_PatternComprehension
         | oC_RelationshipsPattern
-        | oC_ParenthesizedExpression
         | oC_FunctionInvocation
         | oC_Variable
         ;
@@ -360,7 +363,7 @@ TRUE : ('T') ('R') ('U') ('E')  ;
 FALSE : ('F') ('A') ('L') ('S') ('E')  ;
 
 oC_ListLiteral
-           :  '[' SP ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ']' ;
+           :  '[' SP ( rG_Expression SP ( ',' SP rG_Expression  SP )* )? ']' ;
 
 oC_PartialComparisonExpression
                            :  ( '=' SP oC_AddOrSubtractExpression )
@@ -371,9 +374,6 @@ oC_PartialComparisonExpression
                                | ( '>=' SP oC_AddOrSubtractExpression )
                                ;
 
-oC_ParenthesizedExpression
-                       :  '(' SP oC_Expression SP ')' ;
-
 oC_RelationshipsPattern
                     :  oC_NodePattern ( SP oC_PatternElementChain )+ ;
 
@@ -381,10 +381,10 @@ oC_FilterExpression
                 :  oC_IdInColl ( SP oC_Where )? ;
 
 oC_IdInColl
-        :  oC_Variable SP IN SP oC_Expression ;
+        :  oC_Variable SP IN SP oC_PropertyOrLabelsExpression;
 
 oC_FunctionInvocation
-                  :  oC_FunctionName '(' ( DISTINCT SP )? ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
+                  :  oC_FunctionName '(' ( DISTINCT SP )? ( rG_Expression SP ( ',' SP rG_Expression SP )* )? ')' ;
 
 oC_FunctionName
             : ( 'ABS'
@@ -398,11 +398,8 @@ oC_FunctionName
               | 'CONTAINS'
               | 'DIV'
               | 'ENDS WITH'
-              | 'EQ'
               | 'EXISTS'
               | 'FLOOR'
-              | 'GE'
-              | 'GT'
               | 'HEAD'
               | 'ID'
               | 'IN'
@@ -410,11 +407,9 @@ oC_FunctionName
               | 'IS NOT NULL'
               | 'IS NULL'
               | 'LABELS'
-              | 'LE'
               | 'LEFT'
               | 'LENGTH'
               | 'LIST_COMPREHENSION'
-              | 'LT'
               | 'LTRIM'
               | 'MOD'
               | 'MUL'
@@ -449,11 +444,10 @@ oC_FunctionName
               | 'TOSTRING'
               | 'TOUPPER'
               | 'TRIM'
-              | 'TYPE'
-              | 'XOR' ) ;
+              | 'TYPE' ) ;
 
 oC_ExplicitProcedureInvocation
-                           :  oC_ProcedureName '(' SP ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
+                           :  oC_ProcedureName '(' SP ( rG_Expression SP ( ',' SP rG_Expression SP )* )? ')' ;
 
 oC_ImplicitProcedureInvocation
                            :  oC_ProcedureName ;
@@ -483,7 +477,7 @@ oC_PropertyLookup
               :  '.' ( oC_PropertyKeyName ) ;
 
 oC_CaseExpression
-              :  ( ( CASE ( SP oC_CaseAlternatives )+ ) | ( CASE SP oC_Expression ( SP oC_CaseAlternatives )+ ) ) ( SP ELSE SP oC_Expression )? SP END ;
+              :  ( ( CASE ( SP oC_CaseAlternatives )+ ) | ( CASE SP rG_Expression ( SP oC_CaseAlternatives )+ ) ) ( SP ELSE SP rG_Expression )? SP END ;
 
 CASE : ('C') ('A') ('S') ('E')  ;
 
@@ -492,7 +486,7 @@ ELSE : ('E') ('L') ('S') ('E')  ;
 END : ('E') ('N') ('D')  ;
 
 oC_CaseAlternatives
-                :  WHEN SP oC_Expression SP THEN SP oC_Expression ;
+                :  WHEN SP rG_Expression SP THEN SP rG_Expression ;
 
 WHEN : ('W') ('H') ('E') ('N')  ;
 
@@ -511,13 +505,13 @@ oC_NumberLiteral
                  ;
 
 oC_MapLiteral
-          :  '{' ( oC_PropertyKeyName ':' oC_Expression ( ',' oC_PropertyKeyName ':' oC_Expression )* )? '}' ;
+          :  '{' ( oC_PropertyKeyName ':' rG_Expression ( ',' oC_PropertyKeyName ':' rG_Expression )* )? '}' ;
 
 oC_Parameter
          :  '$' ( oC_SymbolicName | DecimalInteger ) ;
 
 oC_PropertyExpression
-                  :  oC_Atom ( oC_PropertyLookup )+ ;
+                  :  oC_Variable ( oC_PropertyLookup ) ;
 
 oC_PropertyKeyName : ( 'prop' NonZeroDigit );
 
