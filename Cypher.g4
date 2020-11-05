@@ -453,7 +453,7 @@ oC_FunctionName
               | 'XOR' ) ;
 
 oC_ExplicitProcedureInvocation
-                           :  oC_ProcedureName SP '(' SP ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
+                           :  oC_ProcedureName '(' SP ( oC_Expression SP ( ',' SP oC_Expression SP )* )? ')' ;
 
 oC_ImplicitProcedureInvocation
                            :  oC_ProcedureName ;
