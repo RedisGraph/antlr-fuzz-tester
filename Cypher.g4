@@ -295,7 +295,6 @@ oC_StringListNullOperatorExpression
 oC_ListOperatorExpression
                       :  ( SP IN SP oC_PropertyOrLabelsExpression )
                           | ( SP '[' oC_Expression ']' )
-                          | ( SP '[' oC_Expression? '..' oC_Expression? ']' )
                           ;
 
 IN : ('I') ('N')  ;
