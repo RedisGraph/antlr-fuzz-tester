@@ -56,7 +56,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_SingleQuery(parent=current)
         if self.max_depth >= 8:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 self.oC_Union(parent=current)
         self.exit_rule(current)
@@ -129,18 +129,18 @@ class CustomCypherGenerator(CypherGenerator):
             current, 0, [0 if [5, 6][i] > self.max_depth else w for i, w in enumerate([1, 1])])
         if choice == 0:
             if self.max_depth >= 6:
-                for _ in self.model.quantify(current, 0, min=0, max=inf):
+                for _ in self.model.quantify(current, 0, min=0, max=3):
                     self.oC_ReadingClause(parent=current)
                     self.SP(parent=current)
             self.oC_Return(parent=current)
         elif choice == 1:
             if self.max_depth >= 6:
-                for _ in self.model.quantify(current, 1, min=0, max=inf):
+                for _ in self.model.quantify(current, 1, min=0, max=3):
                     self.oC_ReadingClause(parent=current)
                     self.SP(parent=current)
             self.oC_UpdatingClause(parent=current)
             if self.max_depth >= 6:
-                for _ in self.model.quantify(current, 2, min=0, max=inf):
+                for _ in self.model.quantify(current, 2, min=0, max=3):
                     self.SP(parent=current)
                     self.oC_UpdatingClause(parent=current)
             if self.max_depth >= 5:
@@ -156,13 +156,13 @@ class CustomCypherGenerator(CypherGenerator):
         current = UnparserRule(name='oC_MultiPartQuery', parent=parent)
         self.enter_rule(current)
         if self.max_depth >= 0:
-            for _ in self.model.quantify(current, 0, min=1, max=inf):
+            for _ in self.model.quantify(current, 0, min=1, max=3):
                 if self.max_depth >= 6:
-                    for _ in self.model.quantify(current, 1, min=0, max=inf):
+                    for _ in self.model.quantify(current, 1, min=0, max=3):
                         self.oC_ReadingClause(parent=current)
                         self.SP(parent=current)
                 if self.max_depth >= 6:
-                    for _ in self.model.quantify(current, 2, min=0, max=inf):
+                    for _ in self.model.quantify(current, 2, min=0, max=3):
                         self.oC_UpdatingClause(parent=current)
                         self.SP(parent=current)
                 self.oC_With(parent=current)
@@ -301,7 +301,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.SP(parent=current)
         self.oC_PatternPart(parent=current)
         if self.max_depth >= 18:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 self.oC_MergeAction(parent=current)
         self.exit_rule(current)
@@ -386,7 +386,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.SP(parent=current)
         self.oC_SetItem(parent=current)
         if self.max_depth >= 16:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 UnlexerRule(src=',', parent=current)
                 self.oC_SetItem(parent=current)
         self.exit_rule(current)
@@ -444,7 +444,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.SP(parent=current)
         self.oC_Expression(parent=current)
         if self.max_depth >= 15:
-            for _ in self.model.quantify(current, 1, min=0, max=inf):
+            for _ in self.model.quantify(current, 1, min=0, max=3):
                 self.SP(parent=current)
                 UnlexerRule(src=',', parent=current)
                 self.SP(parent=current)
@@ -556,7 +556,7 @@ class CustomCypherGenerator(CypherGenerator):
         elif choice == 1:
             self.oC_YieldItem(parent=current)
             if self.max_depth >= 5:
-                for _ in self.model.quantify(current, 0, min=0, max=inf):
+                for _ in self.model.quantify(current, 0, min=0, max=3):
                     self.SP(parent=current)
                     UnlexerRule(src=',', parent=current)
                     self.SP(parent=current)
@@ -685,7 +685,7 @@ class CustomCypherGenerator(CypherGenerator):
         if choice == 0:
             UnlexerRule(src='*', parent=current)
             if self.max_depth >= 16:
-                for _ in self.model.quantify(current, 0, min=0, max=inf):
+                for _ in self.model.quantify(current, 0, min=0, max=3):
                     self.SP(parent=current)
                     UnlexerRule(src=',', parent=current)
                     self.SP(parent=current)
@@ -693,7 +693,7 @@ class CustomCypherGenerator(CypherGenerator):
         elif choice == 1:
             self.oC_ProjectionItem(parent=current)
             if self.max_depth >= 16:
-                for _ in self.model.quantify(current, 1, min=0, max=inf):
+                for _ in self.model.quantify(current, 1, min=0, max=3):
                     self.SP(parent=current)
                     UnlexerRule(src=',', parent=current)
                     self.SP(parent=current)
@@ -730,7 +730,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.SP(parent=current)
         self.oC_SortItem(parent=current)
         if self.max_depth >= 16:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 UnlexerRule(src=',', parent=current)
                 self.SP(parent=current)
                 self.oC_SortItem(parent=current)
@@ -918,7 +918,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_PatternPart(parent=current)
         if self.max_depth >= 4:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 UnlexerRule(src=',', parent=current)
                 self.SP(parent=current)
@@ -963,7 +963,7 @@ class CustomCypherGenerator(CypherGenerator):
         if choice == 0:
             self.oC_NodePattern(parent=current)
             if self.max_depth >= 3:
-                for _ in self.model.quantify(current, 0, min=0, max=inf):
+                for _ in self.model.quantify(current, 0, min=0, max=3):
                     if self.max_depth >= 3:
                         for _ in self.model.quantify(current, 1, min=0, max=1):
                             self.SP(parent=current)
@@ -1086,7 +1086,7 @@ class CustomCypherGenerator(CypherGenerator):
         UnlexerRule(src=':', parent=current)
         self.oC_RelTypeName(parent=current)
         if self.max_depth >= 2:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 UnlexerRule(src='|', parent=current)
                 if self.max_depth >= 0:
                     for _ in self.model.quantify(current, 1, min=0, max=1):
@@ -1168,7 +1168,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_XorExpression(parent=current)
         if self.max_depth >= 13:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 self.OR(parent=current)
                 self.SP(parent=current)
@@ -1193,7 +1193,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_AndExpression(parent=current)
         if self.max_depth >= 12:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 self.XOR(parent=current)
                 self.SP(parent=current)
@@ -1219,7 +1219,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_NotExpression(parent=current)
         if self.max_depth >= 11:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 self.AND(parent=current)
                 self.SP(parent=current)
@@ -1244,7 +1244,7 @@ class CustomCypherGenerator(CypherGenerator):
         current = UnparserRule(name='oC_NotExpression', parent=parent)
         self.enter_rule(current)
         if self.max_depth >= 3:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.NOT(parent=current)
                 self.SP(parent=current)
         self.oC_ComparisonExpression(parent=current)
@@ -1269,7 +1269,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_AddOrSubtractExpression(parent=current)
         if self.max_depth >= 10:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 self.oC_PartialComparisonExpression(parent=current)
         self.exit_rule(current)
@@ -1283,7 +1283,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_MultiplyDivideModuloExpression(parent=current)
         if self.max_depth >= 8:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 choice = self.model.choice(
                     current, 0, [0 if [8, 8][i] > self.max_depth else w for i, w in enumerate([1, 1])])
                 if choice == 0:
@@ -1307,7 +1307,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_PowerOfExpression(parent=current)
         if self.max_depth >= 7:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 choice = self.model.choice(current, 0, [
                                            0 if [7, 7, 7][i] > self.max_depth else w for i, w in enumerate([1, 1, 1])])
                 if choice == 0:
@@ -1335,7 +1335,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_UnaryAddOrSubtractExpression(parent=current)
         if self.max_depth >= 6:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.SP(parent=current)
                 UnlexerRule(src='^', parent=current)
                 self.SP(parent=current)
@@ -1361,7 +1361,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_PropertyOrLabelsExpression(parent=current)
         if self.max_depth >= 4:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 choice = self.model.choice(current, 0, [
                                            0 if [5, 4, 4][i] > self.max_depth else w for i, w in enumerate([1, 1, 1])])
                 if choice == 0:
@@ -1389,17 +1389,6 @@ class CustomCypherGenerator(CypherGenerator):
             self.SP(parent=current)
             UnlexerRule(src='[', parent=current)
             self.oC_Expression(parent=current)
-            UnlexerRule(src=']', parent=current)
-        elif choice == 2:
-            self.SP(parent=current)
-            UnlexerRule(src='[', parent=current)
-            if self.max_depth >= 15:
-                for _ in self.model.quantify(current, 0, min=0, max=1):
-                    self.oC_Expression(parent=current)
-            UnlexerRule(src='..', parent=current)
-            if self.max_depth >= 15:
-                for _ in self.model.quantify(current, 1, min=0, max=1):
-                    self.oC_Expression(parent=current)
             UnlexerRule(src=']', parent=current)
         self.exit_rule(current)
         return current
@@ -1534,7 +1523,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_Atom(parent=current)
         if self.max_depth >= 3:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.oC_PropertyLookup(parent=current)
         if self.max_depth >= 4:
             for _ in self.model.quantify(current, 1, min=0, max=1):
@@ -1701,7 +1690,7 @@ class CustomCypherGenerator(CypherGenerator):
                 self.oC_Expression(parent=current)
                 self.SP(parent=current)
                 if self.max_depth >= 15:
-                    for _ in self.model.quantify(current, 1, min=0, max=inf):
+                    for _ in self.model.quantify(current, 1, min=0, max=3):
                         UnlexerRule(src=',', parent=current)
                         self.SP(parent=current)
                         self.oC_Expression(parent=current)
@@ -1766,7 +1755,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_NodePattern(parent=current)
         if self.max_depth >= 0:
-            for _ in self.model.quantify(current, 0, min=1, max=inf):
+            for _ in self.model.quantify(current, 0, min=1, max=3):
                 self.SP(parent=current)
                 self.oC_PatternElementChain(parent=current)
         self.exit_rule(current)
@@ -1805,7 +1794,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_FunctionName(parent=current)
         UnlexerRule(src='(', parent=current)
-        if self.max_depth >= 3:
+        if self.max_depth >= 15:
             for _ in self.model.quantify(current, 0, min=0, max=1):
                 self.DISTINCT(parent=current)
                 self.SP(parent=current)
@@ -1814,7 +1803,7 @@ class CustomCypherGenerator(CypherGenerator):
                 self.oC_Expression(parent=current)
                 self.SP(parent=current)
                 if self.max_depth >= 15:
-                    for _ in self.model.quantify(current, 2, min=0, max=inf):
+                    for _ in self.model.quantify(current, 2, min=0, max=3):
                         UnlexerRule(src=',', parent=current)
                         self.SP(parent=current)
                         self.oC_Expression(parent=current)
@@ -1976,7 +1965,7 @@ class CustomCypherGenerator(CypherGenerator):
                 self.oC_Expression(parent=current)
                 self.SP(parent=current)
                 if self.max_depth >= 15:
-                    for _ in self.model.quantify(current, 1, min=0, max=inf):
+                    for _ in self.model.quantify(current, 1, min=0, max=3):
                         UnlexerRule(src=',', parent=current)
                         self.SP(parent=current)
                         self.oC_Expression(parent=current)
@@ -2100,7 +2089,7 @@ class CustomCypherGenerator(CypherGenerator):
         if choice == 0:
             self.CASE(parent=current)
             if self.max_depth >= 0:
-                for _ in self.model.quantify(current, 0, min=1, max=inf):
+                for _ in self.model.quantify(current, 0, min=1, max=3):
                     self.SP(parent=current)
                     self.oC_CaseAlternatives(parent=current)
         elif choice == 1:
@@ -2108,7 +2097,7 @@ class CustomCypherGenerator(CypherGenerator):
             self.SP(parent=current)
             self.oC_Expression(parent=current)
             if self.max_depth >= 0:
-                for _ in self.model.quantify(current, 1, min=1, max=inf):
+                for _ in self.model.quantify(current, 1, min=1, max=3):
                     self.SP(parent=current)
                     self.oC_CaseAlternatives(parent=current)
         if self.max_depth >= 15:
@@ -2212,7 +2201,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         UnlexerRule(src='"', parent=current)
         if self.max_depth >= 1:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.StringLiteral_0(parent=current)
         UnlexerRule(src='"', parent=current)
         self.exit_rule(current)
@@ -2244,7 +2233,7 @@ class CustomCypherGenerator(CypherGenerator):
                 UnlexerRule(src=':', parent=current)
                 self.oC_Expression(parent=current)
                 if self.max_depth >= 15:
-                    for _ in self.model.quantify(current, 1, min=0, max=inf):
+                    for _ in self.model.quantify(current, 1, min=0, max=3):
                         UnlexerRule(src=',', parent=current)
                         self.oC_PropertyKeyName(parent=current)
                         UnlexerRule(src=':', parent=current)
@@ -2275,7 +2264,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.oC_Atom(parent=current)
         if self.max_depth >= 0:
-            for _ in self.model.quantify(current, 0, min=1, max=inf):
+            for _ in self.model.quantify(current, 0, min=1, max=3):
                 self.oC_PropertyLookup(parent=current)
         self.exit_rule(current)
         return current
@@ -2313,7 +2302,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         UnlexerRule(src='0x', parent=current)
         if self.max_depth >= 0:
-            for _ in self.model.quantify(current, 0, min=1, max=inf):
+            for _ in self.model.quantify(current, 0, min=1, max=3):
                 self.HexDigit(parent=current)
         self.exit_rule(current)
         return current
@@ -2330,7 +2319,7 @@ class CustomCypherGenerator(CypherGenerator):
         elif choice == 1:
             self.NonZeroDigit(parent=current)
             if self.max_depth >= 2:
-                for _ in self.model.quantify(current, 0, min=0, max=inf):
+                for _ in self.model.quantify(current, 0, min=0, max=3):
                     self.Digit(parent=current)
         self.exit_rule(current)
         return current
@@ -2342,7 +2331,7 @@ class CustomCypherGenerator(CypherGenerator):
         self.enter_rule(current)
         self.ZeroDigit(parent=current)
         if self.max_depth >= 0:
-            for _ in self.model.quantify(current, 0, min=1, max=inf):
+            for _ in self.model.quantify(current, 0, min=1, max=3):
                 self.OctDigit(parent=current)
         self.exit_rule(current)
         return current
@@ -2483,27 +2472,27 @@ class CustomCypherGenerator(CypherGenerator):
                                    0 if [2, 2, 2][i] > self.max_depth else w for i, w in enumerate([1, 1, 1])])
         if choice == 0:
             if self.max_depth >= 0:
-                for _ in self.model.quantify(current, 0, min=1, max=inf):
+                for _ in self.model.quantify(current, 0, min=1, max=3):
                     self.Digit(parent=current)
         elif choice == 1:
             if self.max_depth >= 0:
-                for _ in self.model.quantify(current, 1, min=1, max=inf):
+                for _ in self.model.quantify(current, 1, min=1, max=3):
                     self.Digit(parent=current)
             UnlexerRule(src='.', parent=current)
             if self.max_depth >= 0:
-                for _ in self.model.quantify(current, 2, min=1, max=inf):
+                for _ in self.model.quantify(current, 2, min=1, max=3):
                     self.Digit(parent=current)
         elif choice == 2:
             UnlexerRule(src='.', parent=current)
             if self.max_depth >= 0:
-                for _ in self.model.quantify(current, 3, min=1, max=inf):
+                for _ in self.model.quantify(current, 3, min=1, max=3):
                     self.Digit(parent=current)
         UnlexerRule(src='E', parent=current)
         if self.max_depth >= 0:
             for _ in self.model.quantify(current, 4, min=0, max=1):
                 UnlexerRule(src='-', parent=current)
         if self.max_depth >= 0:
-            for _ in self.model.quantify(current, 5, min=1, max=inf):
+            for _ in self.model.quantify(current, 5, min=1, max=3):
                 self.Digit(parent=current)
         self.exit_rule(current)
         return current
@@ -2514,11 +2503,11 @@ class CustomCypherGenerator(CypherGenerator):
         current = UnlexerRule(name='RegularDecimalReal', parent=parent)
         self.enter_rule(current)
         if self.max_depth >= 2:
-            for _ in self.model.quantify(current, 0, min=0, max=inf):
+            for _ in self.model.quantify(current, 0, min=0, max=3):
                 self.Digit(parent=current)
         UnlexerRule(src='.', parent=current)
         if self.max_depth >= 0:
-            for _ in self.model.quantify(current, 1, min=1, max=inf):
+            for _ in self.model.quantify(current, 1, min=1, max=3):
                 self.Digit(parent=current)
         self.exit_rule(current)
         return current
