@@ -243,7 +243,7 @@ oC_NodeLabel
          :  ':' oC_LabelName ;
 
 oC_RangeLiteral
-            :  '*' ( oC_IntegerLiteral )? ( '..' ( oC_IntegerLiteral )? )? ;
+            :  '*' ( DecimalInteger )? ( '..' ( DecimalInteger )? )? ;
 
 oC_LabelName
          :  ( 'label' NonZeroDigit );
