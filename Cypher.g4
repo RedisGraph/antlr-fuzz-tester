@@ -135,7 +135,7 @@ oC_StandaloneCall
               :  CALL SP ( oC_ExplicitProcedureInvocation | oC_ImplicitProcedureInvocation ) ( SP YIELD SP oC_YieldItems )? ;
 
 oC_YieldItems
-          :  ( '*' | ( oC_YieldItem ( SP ',' SP oC_YieldItem )* ) ) ( SP oC_Where )? ;
+          :  ( oC_YieldItem ( SP ',' SP oC_YieldItem )* ) ( SP oC_Where )? ;
 
 oC_YieldItem
          :  ( oC_ProcedureResultField SP AS SP )? oC_Variable ;
