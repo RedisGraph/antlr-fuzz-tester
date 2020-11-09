@@ -386,10 +386,7 @@ oC_IdInColl
 oC_FunctionInvocation
                   :  oC_FunctionName '(' ( DISTINCT SP )? ( rG_Expression SP ( ',' SP rG_Expression SP )* )? ')' ;
 
-oC_FunctionName
-            :  ( oC_Namespace oC_SymbolicName )
-                | EXISTS
-                ;
+oC_FunctionName :  oC_SymbolicName  ;
 
 oC_ExplicitProcedureInvocation
                            :  oC_ProcedureName '(' SP ( rG_Expression SP ( ',' SP rG_Expression SP )* )? ')' ;
